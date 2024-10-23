@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  jupyter-pytorch:
+    image: quay.io/jupyter/pytorch-notebook:cuda12-python-3.11.8
+    container_name: jupyter_pytorch
+    ports:
+      - "8888:8888"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all  # Make all GPUs visible to the container
+    runtime: nvidia  # Use NVIDIA runtime for GPU support
+    volumes:
+      - ./workspace:/workspace  # Mount local workspace directory to the container
+    restart: unless-stopped  # Restart policy for the container
